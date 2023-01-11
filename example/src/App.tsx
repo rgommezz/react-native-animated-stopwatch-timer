@@ -1,18 +1,29 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-animated-stopwatch';
+import { Button, StyleSheet, View } from 'react-native';
+import AnimatedStopWatch, {
+  StopWatchMethods,
+} from 'react-native-animated-stopwatch';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const animatedCounterRef = React.useRef<StopWatchMethods>(null);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <AnimatedStopWatch
+        ref={animatedCounterRef}
+        textStyle={styles.stopWatch}
+      />
+      <View style={styles.buttonsContainer}>
+        <Button
+          title="Start"
+          onPress={() => animatedCounterRef.current?.start()}
+        />
+        <Button
+          title="Stop"
+          onPress={() => animatedCounterRef.current?.stop()}
+        />
+      </View>
     </View>
   );
 }
@@ -23,9 +34,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 200,
+    padding: 24,
+  },
+  stopWatch: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    color: '#00563F',
   },
 });

@@ -10,12 +10,22 @@ npm install react-native-animated-stopwatch
 
 ## Usage
 
-```js
-import { multiply } from 'react-native-animated-stopwatch';
+```tsx
+import AnimatedStopWatch, {
+  StopWatchMethods,
+} from 'react-native-animated-stopwatch';
 
-// ...
+const animatedCounterRef = React.useRef<StopWatchMethods>(null);
 
-const result = await multiply(3, 7);
+function startClock() {
+  animatedCounterRef.current?.start();
+}
+
+function stopClock() {
+  animatedCounterRef.current?.stop();
+}
+
+return <AnimatedStopWatch ref={animatedCounterRef} />;
 ```
 
 ## Contributing
