@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   stopWatch: {
-    fontSize: 32,
+    fontSize: 48,
     fontWeight: 'bold',
     letterSpacing: 1,
     color: '#00563F',

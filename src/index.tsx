@@ -16,11 +16,14 @@ import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 import useClock from './useClock';
 
-const COUNT_ANIMATION_DURATION = 200;
-const COUNT_ANIMATION_DELAY = 0;
-const COUNT_ANIMATION_DISTANCE = 40;
+const DEFAULT_ANIMATION_DELAY = 0;
+const DEFAULT_ANIMATION_DISTANCE = 40;
+const DEFAULT_ANIMATION_DURATION = 200;
 
 type Props = {
+  animationDuration?: number;
+  animationDelay?: number;
+  animationDistance?: number;
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
 };
@@ -31,7 +34,13 @@ export interface StopWatchMethods {
 }
 
 function StopWatch(
-  { containerStyle, textStyle }: Props,
+  {
+    animationDelay = DEFAULT_ANIMATION_DELAY,
+    animationDistance = DEFAULT_ANIMATION_DISTANCE,
+    animationDuration = DEFAULT_ANIMATION_DURATION,
+    containerStyle,
+    textStyle,
+  }: Props,
   ref: ForwardedRef<StopWatchMethods>
 ) {
   const { hundredthMs, lastDigit, tens, minutes, stop, start } = useClock();
@@ -68,14 +77,14 @@ function StopWatch(
       oldValue.value = numericValue;
       const animations = {
         originY: withDelay(
-          COUNT_ANIMATION_DELAY,
+          animationDelay,
           withTiming(values.targetOriginY, {
-            duration: COUNT_ANIMATION_DURATION,
+            duration: animationDuration,
           })
         ),
       };
       const initialValues = {
-        originY: values.targetOriginY - COUNT_ANIMATION_DISTANCE,
+        originY: values.targetOriginY - animationDistance,
       };
       return {
         initialValues,
@@ -87,9 +96,9 @@ function StopWatch(
     'worklet';
     const animations = {
       originY: withDelay(
-        COUNT_ANIMATION_DELAY,
-        withTiming(values.currentOriginY + COUNT_ANIMATION_DISTANCE, {
-          duration: COUNT_ANIMATION_DURATION,
+        animationDelay,
+        withTiming(values.currentOriginY + animationDistance, {
+          duration: animationDuration,
         })
       ),
     };
