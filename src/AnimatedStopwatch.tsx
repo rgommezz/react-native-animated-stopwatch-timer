@@ -38,6 +38,10 @@ export interface StopwatchProps {
    */
   containerStyle?: StyleProp<ViewStyle>;
   /**
+   * Extra style applied only to each digit, excluding separators.
+   */
+  digitStyle?: StyleProp<TextStyle>;
+  /**
    * The number of zeros for the minutes.
    */
   leadingZeros?: 1 | 2;
@@ -46,9 +50,13 @@ export interface StopwatchProps {
    */
   enterAnimationType?: 'slide-in-up' | 'slide-in-down';
   /**
-   * The style of the stopwatch Text.
+   * Extra style applied only to separators. In this case, the colon (:) and the comma (,)
    */
-  textStyle?: StyleProp<TextStyle>;
+  separatorStyle?: StyleProp<TextStyle>;
+  /**
+   * The style applied to each individual character of the stopwatch.
+   */
+  textCharStyle?: StyleProp<TextStyle>;
   /**
    * If 0, the stopwatch will only display seconds and minutes.
    * If 1, the stopwatch will display seconds, minutes and hundredth of ms.
@@ -82,8 +90,10 @@ function Stopwatch(
     animationDuration = DEFAULT_ANIMATION_DURATION,
     containerStyle,
     enterAnimationType = 'slide-in-up',
+    digitStyle,
     leadingZeros = 1,
-    textStyle,
+    separatorStyle,
+    textCharStyle,
     trailingZeros = 1,
   }: StopwatchProps,
   ref: ForwardedRef<StopWatchMethods>
@@ -169,21 +179,43 @@ function Stopwatch(
     };
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { width, ...textCharStyleWithoutWidth } =
+    StyleSheet.flatten(textCharStyle);
+
   return (
     <View style={[styles.container, containerStyle]}>
-      {leadingZeros === 2 && <Text style={textStyle}>0</Text>}
+      {leadingZeros === 2 && (
+        <Text
+          style={[
+            styles.defaultCharStyle,
+            textCharStyleWithoutWidth,
+            digitStyle,
+          ]}
+        >
+          0
+        </Text>
+      )}
       <Animated.Text
         key={`${minutes}-minutes`}
-        style={textStyle}
+        style={[styles.defaultCharStyle, textCharStyleWithoutWidth, digitStyle]}
         entering={createEntering(oldMinutes, minutes)}
         exiting={exiting}
       >
         {minutes}
       </Animated.Text>
-      <Text style={textStyle}>:</Text>
+      <Text
+        style={[
+          styles.defaultCharStyle,
+          textCharStyleWithoutWidth,
+          separatorStyle,
+        ]}
+      >
+        :
+      </Text>
       <Animated.Text
         key={`${tens}-tens`}
-        style={textStyle}
+        style={[styles.defaultCharStyle, textCharStyleWithoutWidth, digitStyle]}
         entering={createEntering(oldTens, tens)}
         exiting={exiting}
       >
@@ -191,7 +223,7 @@ function Stopwatch(
       </Animated.Text>
       <Animated.Text
         key={`${lastDigit}-count`}
-        style={textStyle}
+        style={[styles.defaultCharStyle, textCharStyleWithoutWidth, digitStyle]}
         entering={createEntering(oldLastDigit, lastDigit)}
         exiting={exiting}
       >
@@ -199,12 +231,32 @@ function Stopwatch(
       </Animated.Text>
       {trailingZeros > 0 && (
         <>
-          <Text style={textStyle}>,</Text>
-          <Text style={textStyle}>
+          <Text
+            style={[
+              styles.defaultCharStyle,
+              textCharStyleWithoutWidth,
+              separatorStyle,
+            ]}
+          >
+            ,
+          </Text>
+          <Text
+            style={[
+              styles.defaultCharStyle,
+              textCharStyleWithoutWidth,
+              digitStyle,
+            ]}
+          >
             {tensOfMs >= 10 ? String(tensOfMs).charAt(0) : 0}
           </Text>
           {trailingZeros === 2 && (
-            <Text style={textStyle}>
+            <Text
+              style={[
+                styles.defaultCharStyle,
+                textCharStyleWithoutWidth,
+                digitStyle,
+              ]}
+            >
               {tensOfMs >= 10
                 ? String(tensOfMs).charAt(1)
                 : String(tensOfMs).charAt(0)}
@@ -221,6 +273,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     overflow: 'hidden',
+  },
+  defaultCharStyle: {
+    textAlign: 'center',
   },
 });
 

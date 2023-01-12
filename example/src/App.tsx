@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconButton, Provider as PaperProvider } from 'react-native-paper';
 
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import AnimatedStopWatch, {
   StopWatchMethods,
 } from 'react-native-animated-stopwatch';
@@ -15,7 +15,19 @@ export default function App() {
         <AnimatedStopWatch
           ref={stopwatchRef}
           containerStyle={styles.stopWatchContainer}
-          textStyle={styles.stopWatch}
+          digitStyle={Platform.select({
+            ios: {
+              width: 32,
+            },
+            android: undefined,
+          })}
+          separatorStyle={Platform.select({
+            ios: {
+              width: 14,
+            },
+            android: undefined,
+          })}
+          textCharStyle={styles.stopWatchChar}
           trailingZeros={2}
         />
         <View style={styles.buttonsContainer}>
@@ -68,7 +80,7 @@ const styles = StyleSheet.create({
     width: 240,
     paddingTop: 48,
   },
-  stopWatch: {
+  stopWatchChar: {
     fontSize: 48,
     fontWeight: 'bold',
     letterSpacing: 1,
