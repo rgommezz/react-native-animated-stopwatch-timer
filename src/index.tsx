@@ -14,7 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
-import useClock from './useClock';
+import useStopwatch from './useStopwatch';
 
 const DEFAULT_ANIMATION_DELAY = 0;
 const DEFAULT_ANIMATION_DISTANCE = 40;
@@ -49,7 +49,7 @@ type Props = {
    * If 0, the stopwatch will only display seconds and minutes.
    * If 1, the stopwatch will display seconds, minutes and hundredth of ms.
    */
-  trailingZeros?: 0 | 1;
+  trailingZeros?: 0 | 1 | 2;
 };
 
 export interface StopWatchMethods {
@@ -67,7 +67,7 @@ export interface StopWatchMethods {
   reset: () => void;
 }
 
-function StopWatch(
+function Stopwatch(
   {
     animationDelay = DEFAULT_ANIMATION_DELAY,
     animationDistance = DEFAULT_ANIMATION_DISTANCE,
@@ -79,8 +79,8 @@ function StopWatch(
   }: Props,
   ref: ForwardedRef<StopWatchMethods>
 ) {
-  const { hundredthMs, lastDigit, tens, minutes, start, reset, pause } =
-    useClock();
+  const { tensOfMs, lastDigit, tens, minutes, start, reset, pause } =
+    useStopwatch();
 
   useImperativeHandle(ref, () => ({
     pause,
@@ -177,10 +177,19 @@ function StopWatch(
       >
         {lastDigit}
       </Animated.Text>
-      {trailingZeros === 1 && (
+      {trailingZeros > 0 && (
         <>
           <Text style={textStyle}>,</Text>
-          <Text style={textStyle}>{hundredthMs}</Text>
+          <Text style={textStyle}>
+            {tensOfMs >= 10 ? String(tensOfMs).charAt(0) : 0}
+          </Text>
+          {trailingZeros === 2 && (
+            <Text style={textStyle}>
+              {tensOfMs >= 10
+                ? String(tensOfMs).charAt(1)
+                : String(tensOfMs).charAt(0)}
+            </Text>
+          )}
         </>
       )}
     </View>
@@ -195,6 +204,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const AnimatedStopWatch = forwardRef<StopWatchMethods, Props>(StopWatch);
+const AnimatedStopwatch = forwardRef<StopWatchMethods, Props>(Stopwatch);
 
-export default AnimatedStopWatch;
+export default AnimatedStopwatch;

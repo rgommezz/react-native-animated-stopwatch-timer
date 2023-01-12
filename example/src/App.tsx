@@ -13,7 +13,8 @@ export default function App() {
       <AnimatedStopWatch
         ref={animatedCounterRef}
         textStyle={styles.stopWatch}
-        animationDuration={100}
+        animationDistance={120}
+        trailingZeros={2}
       />
       <View style={styles.buttonsContainer}>
         <Button
