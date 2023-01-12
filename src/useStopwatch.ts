@@ -29,7 +29,13 @@ const useStopwatch = () => {
     }, 16);
   }
 
-  function clear() {
+  function resetState() {
+    setElapsedInMs(0);
+    startTime.current = null;
+    pausedTime.current = null;
+  }
+
+  function removeInterval() {
     if (intervalId.current) {
       clearInterval(intervalId.current);
       intervalId.current = null;
@@ -37,7 +43,7 @@ const useStopwatch = () => {
   }
 
   function pause() {
-    clear();
+    removeInterval();
     if (pausedTime.current || elapsedInMs === 0) {
       return;
     }
@@ -45,10 +51,8 @@ const useStopwatch = () => {
   }
 
   function reset() {
-    clear();
-    setElapsedInMs(0);
-    startTime.current = null;
-    pausedTime.current = null;
+    removeInterval();
+    resetState();
   }
 
   return {
