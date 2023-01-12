@@ -17,10 +17,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import useStopwatch from './useStopwatch';
 
 const DEFAULT_ANIMATION_DELAY = 0;
-const DEFAULT_ANIMATION_DISTANCE = 40;
+const DEFAULT_ANIMATION_DISTANCE = 80;
 const DEFAULT_ANIMATION_DURATION = 200;
 
-type Props = {
+export interface StopwatchProps {
   /**
    * The enter/exit animation duration in milliseconds of a stopwatch digit.
    */
@@ -46,6 +46,10 @@ type Props = {
    */
   enterAnimationType?: 'slide-in-up' | 'slide-in-down';
   /**
+   * A snapshot of the stopwatch digits and the current ms Elapsed
+   */
+  onPaused?: (elapsedInMs: number) => void;
+  /**
    * The style of the stopwatch Text.
    */
   textStyle?: StyleProp<TextStyle>;
@@ -54,7 +58,7 @@ type Props = {
    * If 1, the stopwatch will display seconds, minutes and hundredth of ms.
    */
   trailingZeros?: 0 | 1 | 2;
-};
+}
 
 export interface StopWatchMethods {
   /**
@@ -79,13 +83,14 @@ function Stopwatch(
     containerStyle,
     enterAnimationType = 'slide-in-up',
     leadingZeros = 1,
+    onPaused,
     textStyle,
     trailingZeros = 1,
-  }: Props,
+  }: StopwatchProps,
   ref: ForwardedRef<StopWatchMethods>
 ) {
   const { tensOfMs, lastDigit, tens, minutes, start, reset, pause } =
-    useStopwatch();
+    useStopwatch(onPaused);
 
   useImperativeHandle(ref, () => ({
     pause,
@@ -211,6 +216,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const AnimatedStopwatch = forwardRef<StopWatchMethods, Props>(Stopwatch);
+const AnimatedStopwatch = forwardRef<StopWatchMethods, StopwatchProps>(
+  Stopwatch
+);
 
 export default AnimatedStopwatch;

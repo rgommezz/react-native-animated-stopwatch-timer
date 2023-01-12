@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
+import type { StopwatchProps } from './index';
 
 /**
  * A custom hooks that handles the state for the stopwatch
  */
-const useStopwatch = () => {
+const useStopwatch = (onPaused: StopwatchProps['onPaused']) => {
   const [elapsedInMs, setElapsedInMs] = useState(0);
   const startTime = useRef<number | null>(null);
   const pausedTime = useRef<number | null>(null);
@@ -47,6 +48,7 @@ const useStopwatch = () => {
     if (pausedTime.current || elapsedInMs === 0) {
       return;
     }
+    onPaused?.(elapsedInMs);
     pausedTime.current = Date.now();
   }
 
