@@ -17,7 +17,6 @@ export default function App() {
           containerStyle={styles.stopWatchContainer}
           textStyle={styles.stopWatch}
           trailingZeros={2}
-          onPaused={(elapsedInMs) => console.log('onPaused', elapsedInMs)}
         />
         <View style={styles.buttonsContainer}>
           {/** @ts-ignore */}

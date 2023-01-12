@@ -1,16 +1,19 @@
 import { useRef, useState } from 'react';
-import type { StopwatchProps } from './AnimatedStopwatch';
 
 /**
  * A custom hooks that handles the state for the stopwatch
  */
-const useStopwatch = (onPaused: StopwatchProps['onPaused']) => {
+const useStopwatch = () => {
   const [elapsedInMs, setElapsedInMs] = useState(0);
   const startTime = useRef<number | null>(null);
   const pausedTime = useRef<number | null>(null);
   const intervalId = useRef<NodeJS.Timer | null>(null);
 
   const countInSeconds = Math.floor(elapsedInMs / 1000);
+
+  function getSnapshot() {
+    return elapsedInMs;
+  }
 
   function play() {
     if (intervalId.current) {
@@ -45,11 +48,10 @@ const useStopwatch = (onPaused: StopwatchProps['onPaused']) => {
 
   function pause() {
     removeInterval();
-    if (pausedTime.current || elapsedInMs === 0) {
-      return;
+    if (!pausedTime.current && elapsedInMs > 0) {
+      pausedTime.current = Date.now();
     }
-    onPaused?.(elapsedInMs);
-    pausedTime.current = Date.now();
+    return getSnapshot();
   }
 
   function reset() {
@@ -65,6 +67,7 @@ const useStopwatch = (onPaused: StopwatchProps['onPaused']) => {
     play,
     pause,
     reset,
+    getSnapshot,
   };
 };
 

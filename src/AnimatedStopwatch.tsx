@@ -46,10 +46,6 @@ export interface StopwatchProps {
    */
   enterAnimationType?: 'slide-in-up' | 'slide-in-down';
   /**
-   * A snapshot of the stopwatch digits and the current ms Elapsed
-   */
-  onPaused?: (elapsedInMs: number) => void;
-  /**
    * The style of the stopwatch Text.
    */
   textStyle?: StyleProp<TextStyle>;
@@ -66,13 +62,17 @@ export interface StopWatchMethods {
    */
   play: () => void;
   /**
-   * Pauses the stopwatch.
+   * Pauses the stopwatch and returns the current elapsed time in milliseconds.
    */
-  pause: () => void;
+  pause: () => number;
   /**
    * Resets the stopwatch.
    */
   reset: () => void;
+  /**
+   * Returns the current elapsed time in milliseconds.
+   */
+  getSnapshot: () => number;
 }
 
 function Stopwatch(
@@ -83,19 +83,27 @@ function Stopwatch(
     containerStyle,
     enterAnimationType = 'slide-in-up',
     leadingZeros = 1,
-    onPaused,
     textStyle,
     trailingZeros = 1,
   }: StopwatchProps,
   ref: ForwardedRef<StopWatchMethods>
 ) {
-  const { tensOfMs, lastDigit, tens, minutes, play, reset, pause } =
-    useStopwatch(onPaused);
+  const {
+    tensOfMs,
+    lastDigit,
+    tens,
+    minutes,
+    play,
+    reset,
+    pause,
+    getSnapshot,
+  } = useStopwatch();
 
   useImperativeHandle(ref, () => ({
     play,
     pause,
     reset,
+    getSnapshot,
   }));
 
   const oldLastDigit = useSharedValue<number>(-1);

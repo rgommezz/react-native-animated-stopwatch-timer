@@ -28,7 +28,9 @@ function play() {
 }
 
 function pause() {
-  stopwatchRef.current?.pause();
+  const elapsedTimeInMs = stopwatchRef.current?.pause();
+  // Do something with the elapsed time
+  console.log(elapsedTimeInMs);
 }
 
 function reset() {
@@ -54,7 +56,7 @@ return <AnimatedStopwatch ref={stopwatchRef} />;
 
 ## Methods
 
-#### `start()`
+#### `play: () => void`
 
 Starts the stopwatch or resumes it if paused. It has no effect if the stopwatch is already running.
 
@@ -62,15 +64,15 @@ Starts the stopwatch or resumes it if paused. It has no effect if the stopwatch 
 stopwatchRef.current?.play();
 ```
 
-#### `pause()`
+#### `pause: () => number`
 
-Pauses the stopwatch. It has no effect if the stopwatch is either paused or reset. You can use the `onPaused` prop to get a snapshot of the time elapsed when the stopwatch pauses
+Pauses the stopwatch. It has no effect if the stopwatch is either paused or reset. The method returns a snapshot of the time elapsed in ms.
 
 ```js
 stopwatchRef.current?.pause();
 ```
 
-#### `reset()`
+#### `reset: () => void`
 
 Resets the stopwatch to 0.
 
@@ -78,7 +80,15 @@ Resets the stopwatch to 0.
 stopwatchRef.current?.reset();
 ```
 
-`stopwatchRef` refers to the [`ref`](https://reactjs.org/docs/react-api.html#reactcreateref) passed to the `AnimatedStopwatch` component.
+#### `getSnapshot: () => number`
+
+Returns the current time elapsed in ms.
+
+```js
+stopwatchRef.current?.getSnapshot();
+```
+
+`stopwatchRef` refers to the [`ref`](https://reactjs.org/docs/hooks-reference.html#useref) passed to the `AnimatedStopwatch` component.
 
 ## Contributing
 
