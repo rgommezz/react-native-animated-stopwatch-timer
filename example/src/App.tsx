@@ -13,6 +13,7 @@ export default function App() {
       <AnimatedStopWatch
         ref={animatedCounterRef}
         textStyle={styles.stopWatch}
+        enterAnimationType="slide-in-down"
         animationDistance={120}
         trailingZeros={2}
       />

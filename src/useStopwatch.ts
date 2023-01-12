@@ -38,6 +38,9 @@ const useStopwatch = () => {
 
   function pause() {
     clear();
+    if (pausedTime.current || elapsedInMs === 0) {
+      return;
+    }
     pausedTime.current = Date.now();
   }
 

@@ -42,6 +42,10 @@ type Props = {
    */
   leadingZeros?: 1 | 2;
   /**
+   * Whether the new digit should enter from the top or the bottom.
+   */
+  enterAnimationType?: 'slide-in-up' | 'slide-in-down';
+  /**
    * The style of the stopwatch Text.
    */
   textStyle?: StyleProp<TextStyle>;
@@ -73,6 +77,7 @@ function Stopwatch(
     animationDistance = DEFAULT_ANIMATION_DISTANCE,
     animationDuration = DEFAULT_ANIMATION_DURATION,
     containerStyle,
+    enterAnimationType = 'slide-in-up',
     leadingZeros = 1,
     textStyle,
     trailingZeros = 1,
@@ -121,8 +126,9 @@ function Stopwatch(
           })
         ),
       };
+      const enterDirection = enterAnimationType === 'slide-in-up' ? -1 : 1;
       const initialValues = {
-        originY: values.targetOriginY - animationDistance,
+        originY: values.targetOriginY + animationDistance * enterDirection,
       };
       return {
         initialValues,
@@ -132,10 +138,11 @@ function Stopwatch(
 
   const exiting = (values: ExitAnimationsValues) => {
     'worklet';
+    const exitDirection = enterAnimationType === 'slide-in-up' ? 1 : -1;
     const animations = {
       originY: withDelay(
         animationDelay,
-        withTiming(values.currentOriginY + animationDistance, {
+        withTiming(values.currentOriginY + animationDistance * exitDirection, {
           duration: animationDuration,
         })
       ),
