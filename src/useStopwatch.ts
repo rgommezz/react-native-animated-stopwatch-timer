@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import type { StopwatchProps } from './index';
+import type { StopwatchProps } from './AnimatedStopwatch';
 
 /**
  * A custom hooks that handles the state for the stopwatch
