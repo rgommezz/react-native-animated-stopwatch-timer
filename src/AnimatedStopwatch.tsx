@@ -62,13 +62,13 @@ export interface StopwatchProps {
 
 export interface StopWatchMethods {
   /**
+   * Starts the stopwatch or resumes it if paused. Has no effect if the stopwatch is already running.
+   */
+  play: () => void;
+  /**
    * Pauses the stopwatch.
    */
   pause: () => void;
-  /**
-   * Starts the stopwatch. Has no effect if the stopwatch is already running.
-   */
-  start: () => void;
   /**
    * Resets the stopwatch.
    */
@@ -89,12 +89,12 @@ function Stopwatch(
   }: StopwatchProps,
   ref: ForwardedRef<StopWatchMethods>
 ) {
-  const { tensOfMs, lastDigit, tens, minutes, start, reset, pause } =
+  const { tensOfMs, lastDigit, tens, minutes, play, reset, pause } =
     useStopwatch(onPaused);
 
   useImperativeHandle(ref, () => ({
+    play,
     pause,
-    start,
     reset,
   }));
 

@@ -12,7 +12,7 @@ const useStopwatch = (onPaused: StopwatchProps['onPaused']) => {
 
   const countInSeconds = Math.floor(elapsedInMs / 1000);
 
-  function startClock() {
+  function play() {
     if (intervalId.current) {
       return;
     }
@@ -62,7 +62,7 @@ const useStopwatch = (onPaused: StopwatchProps['onPaused']) => {
     lastDigit: countInSeconds % 10,
     tens: Math.floor(countInSeconds / 10) % 6,
     minutes: Math.floor(countInSeconds / 60),
-    start: startClock,
+    play,
     pause,
     reset,
   };

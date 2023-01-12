@@ -25,7 +25,7 @@ export default function App() {
             icon="play"
             mode="contained"
             size={32}
-            onPress={() => stopwatchRef.current?.start()}
+            onPress={() => stopwatchRef.current?.play()}
           />
           {/** @ts-ignore */}
           <IconButton
