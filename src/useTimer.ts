@@ -1,13 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import throttle from 'lodash.throttle';
 
 /**
  * A custom hook that handles the state for the timer
  */
-const useTimer = (initialTimeInMs: number = 0) => {
+const useTimer = (
+  initialTimeInMs: number = 0,
+  onFinish: () => void = () => null
+) => {
   const [elapsedInMs, setElapsedInMs] = useState(0);
   const startTime = useRef<number | null>(null);
   const pausedTime = useRef<number | null>(null);
   const intervalId = useRef<NodeJS.Timer | null>(null);
+  const throttledOnFinish = useMemo(
+    () => throttle(onFinish, 100, { trailing: false }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   useEffect(() => {
     // Ensure that the timer is reset when the initialTimeInMs changes
@@ -20,8 +29,9 @@ const useTimer = (initialTimeInMs: number = 0) => {
     if (initialTimeInMs > 0 && elapsedInMs >= initialTimeInMs) {
       removeInterval();
       setElapsedInMs(initialTimeInMs);
+      throttledOnFinish();
     }
-  }, [elapsedInMs, initialTimeInMs]);
+  }, [elapsedInMs, initialTimeInMs, throttledOnFinish]);
 
   function getSnapshot() {
     return Math.abs(initialTimeInMs - elapsedInMs);
