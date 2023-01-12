@@ -5,13 +5,26 @@
 ![platforms: ios, android, web](https://img.shields.io/badge/platform-ios%2C%20android-blue)
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/rgommezz/react-native-animated-stopwatch/blob/master/LICENSE)
 
-React Native Stopwatch component that smoothly animates the digits change. Cross-platform, performant, with all animations executed on the UI thread at 60FPS. Compatible with Expo.
+React Native Stopwatch component that empowers reanimated worklets to smoothly animates the digits change. Cross-platform, performant, with all layout animations executed on the UI thread at 60FPS. Compatible with Expo.
 
 ## Installation
 
 ```sh
 npm install react-native-animated-stopwatch
 ```
+
+You also need to install `react-native-reanimated` `2.5.x` or higher.
+
+```sh
+npm install react-native-reanimated
+```
+
+If you are installing reanimated on a bare React Native app, you should also follow this [additional installation instructions.](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/)
+
+
+## Preview
+
+![](gifs/stopwatch.gif)
 
 ## Usage
 
