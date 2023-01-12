@@ -7,13 +7,13 @@ import AnimatedStopWatch, {
 } from 'react-native-animated-stopwatch';
 
 export default function App() {
-  const animatedCounterRef = React.useRef<StopWatchMethods>(null);
+  const stopwatchRef = React.useRef<StopWatchMethods>(null);
 
   return (
     <PaperProvider>
       <View style={styles.container}>
         <AnimatedStopWatch
-          ref={animatedCounterRef}
+          ref={stopwatchRef}
           containerStyle={styles.stopWatchContainer}
           textStyle={styles.stopWatch}
           trailingZeros={2}
@@ -25,21 +25,21 @@ export default function App() {
             icon="play"
             mode="contained"
             size={32}
-            onPress={() => animatedCounterRef.current?.start()}
+            onPress={() => stopwatchRef.current?.start()}
           />
           {/** @ts-ignore */}
           <IconButton
             icon="pause"
             mode="contained"
             size={32}
-            onPress={() => animatedCounterRef.current?.pause()}
+            onPress={() => stopwatchRef.current?.pause()}
           />
           {/** @ts-ignore */}
           <IconButton
             icon="refresh"
             mode="contained"
             size={32}
-            onPress={() => animatedCounterRef.current?.reset()}
+            onPress={() => stopwatchRef.current?.reset()}
           />
         </View>
       </View>
