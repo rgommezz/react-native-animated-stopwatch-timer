@@ -20,7 +20,7 @@ const DEFAULT_ANIMATION_DELAY = 0;
 const DEFAULT_ANIMATION_DISTANCE = 80;
 const DEFAULT_ANIMATION_DURATION = 200;
 
-export interface StopwatchProps {
+export interface StopwatchTimerProps {
   /**
    * The enter/exit animation duration in milliseconds of a stopwatch digit.
    */
@@ -68,7 +68,7 @@ export interface StopwatchProps {
   trailingZeros?: 0 | 1 | 2;
 }
 
-export interface StopWatchMethods {
+export interface StopwatchTimerMethods {
   /**
    * Starts the stopwatch or resumes it if paused. Has no effect if the stopwatch is already running.
    */
@@ -100,8 +100,8 @@ function Stopwatch(
     separatorStyle,
     textCharStyle,
     trailingZeros = 1,
-  }: StopwatchProps,
-  ref: ForwardedRef<StopWatchMethods>
+  }: StopwatchTimerProps,
+  ref: ForwardedRef<StopwatchTimerMethods>
 ) {
   const {
     tensOfMs,
@@ -284,8 +284,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const AnimatedStopwatch = forwardRef<StopWatchMethods, StopwatchProps>(
+const StopwatchTimer = forwardRef<StopwatchTimerMethods, StopwatchTimerProps>(
   Stopwatch
 );
 
-export default AnimatedStopwatch;
+export default StopwatchTimer;

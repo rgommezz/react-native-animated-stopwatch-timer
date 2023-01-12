@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * A custom hooks that handles the state for the timer
+ * A custom hook that handles the state for the timer
  */
 const useTimer = (initialTimeInMs: number = 0) => {
   const [elapsedInMs, setElapsedInMs] = useState(0);

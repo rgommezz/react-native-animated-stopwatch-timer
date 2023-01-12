@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-animated-stopwatch": ["./src/index"]
+      "react-native-animated-stopwatch-timer": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

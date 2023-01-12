@@ -2,17 +2,17 @@ import * as React from 'react';
 import { IconButton, Provider as PaperProvider } from 'react-native-paper';
 
 import { Platform, StyleSheet, View } from 'react-native';
-import AnimatedStopWatch, {
-  StopWatchMethods,
-} from 'react-native-animated-stopwatch';
+import StopwatchTimer, {
+  StopwatchTimerMethods,
+} from 'react-native-animated-stopwatch-timer';
 
 export default function App() {
-  const stopwatchRef = React.useRef<StopWatchMethods>(null);
+  const stopwatchRef = React.useRef<StopwatchTimerMethods>(null);
 
   return (
     <PaperProvider>
       <View style={styles.container}>
-        <AnimatedStopWatch
+        <StopwatchTimer
           ref={stopwatchRef}
           containerStyle={styles.stopWatchContainer}
           digitStyle={Platform.select({

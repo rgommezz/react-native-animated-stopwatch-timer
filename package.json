@@ -1,5 +1,5 @@
 {
-  "name": "react-native-animated-stopwatch",
+  "name": "react-native-animated-stopwatch-timer",
   "version": "0.3.0",
   "description": "React Native Stopwatch component that smoothly animates the digits change",
   "main": "lib/commonjs/index",
@@ -40,13 +40,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/rgommezz/react-native-animated-stopwatch",
+  "repository": "https://github.com/rgommezz/react-native-animated-stopwatch-timer",
   "author": "rgommezz <rauliyohmc@gmail.com> (https://github.com/rgommezz)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rgommezz/react-native-animated-stopwatch/issues"
+    "url": "https://github.com/rgommezz/react-native-animated-stopwatch-timer/issues"
   },
-  "homepage": "https://github.com/rgommezz/react-native-animated-stopwatch#readme",
+  "homepage": "https://github.com/rgommezz/react-native-animated-stopwatch-timer#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

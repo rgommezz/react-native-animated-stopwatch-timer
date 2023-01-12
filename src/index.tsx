@@ -1,8 +1,8 @@
-import AnimatedStopwatch, {
-  StopwatchProps,
-  StopWatchMethods,
-} from './AnimatedStopwatch';
+import StopwatchTimer, {
+  StopwatchTimerProps,
+  StopwatchTimerMethods,
+} from './StopwatchTimer';
 
-export default AnimatedStopwatch;
+export default StopwatchTimer;
 
-export type { StopwatchProps, StopWatchMethods };
+export type { StopwatchTimerProps, StopwatchTimerMethods };

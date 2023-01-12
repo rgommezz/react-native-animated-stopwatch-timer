@@ -1,9 +1,9 @@
 # Animated Stopwatch
 
-[![npm](https://img.shields.io/npm/v/react-native-animated-stopwatch?color=brightgreen)](https://www.npmjs.com/package/react-native-animated-stopwatch)
-[![npm bundle size](https://img.shields.io/bundlephobia/min/react-native-animated-stopwatch)](https://bundlephobia.com/result?p=react-native-animated-stopwatch)
+[![npm](https://img.shields.io/npm/v/react-native-animated-stopwatch-timer?color=brightgreen)](https://www.npmjs.com/package/react-native-animated-stopwatch-timer)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/react-native-animated-stopwatch-timer)](https://bundlephobia.com/result?p=react-native-animated-stopwatch-timer)
 ![platforms: ios, android, web](https://img.shields.io/badge/platform-ios%2C%20android-blue)
-[![license MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/rgommezz/react-native-animated-stopwatch/blob/master/LICENSE)
+[![license MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/rgommezz/react-native-animated-stopwatch-timer/blob/master/LICENSE)
 
 React Native Stopwatch component that empowers **reanimated worklets** to smoothly animate the digits change. Cross-platform, performant, with all **layout animations executed on the UI thread at 60FPS**. Compatible with Expo.
 
@@ -12,7 +12,7 @@ React Native Stopwatch component that empowers **reanimated worklets** to smooth
 ## Installation
 
 ```sh
-npm install react-native-animated-stopwatch
+npm install react-native-animated-stopwatch-timer
 ```
 
 You also need to install `react-native-reanimated` `2.5.x` or higher.
@@ -29,7 +29,7 @@ If you are installing reanimated on a bare React Native app, you should also fol
 import { useRef } from 'react';
 import AnimatedStopwatch, {
   StopWatchMethods,
-} from 'react-native-animated-stopwatch';
+} from 'react-native-animated-stopwatch-timer';
 
 const stopwatchRef = useRef<StopWatchMethods>(null);
 
@@ -55,7 +55,7 @@ return <AnimatedStopwatch ref={stopwatchRef} />;
 ## Props
 
 | Name                 | Required | Type                               | Description                                                                                                                                                                                                                                                                                                                   |
-| -------------------- | -------- | ---------------------------------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------- | -------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `animationDuration`  | no       | `number`                           | The enter/exit animation duration in milliseconds of a stopwatch digit. Defaults to `80`                                                                                                                                                                                                                                      |
 | `animationDelay`     | no       | `number`                           | The enter/exit animation delay in milliseconds of a stopwatch digit. Defaults to `0`                                                                                                                                                                                                                                          |
 | `animationDistance`  | no       | `number`                           | The enter/exit animation vertical distance in dp of a stopwatch digit. Defaults to `120`                                                                                                                                                                                                                                      |
