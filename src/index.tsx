@@ -13,7 +13,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import useClock from './useClock';
 
 const DEFAULT_ANIMATION_DELAY = 0;
@@ -21,16 +21,50 @@ const DEFAULT_ANIMATION_DISTANCE = 40;
 const DEFAULT_ANIMATION_DURATION = 200;
 
 type Props = {
+  /**
+   * The enter/exit animation duration in milliseconds of a stopwatch digit.
+   */
   animationDuration?: number;
+  /**
+   * The enter/exit animation delay in milliseconds of a stopwatch digit.
+   */
   animationDelay?: number;
+  /**
+   * The enter/exit animation distance in dp of a stopwatch digit.
+   */
   animationDistance?: number;
+  /**
+   * The style of the stopwatch View container.
+   */
   containerStyle?: StyleProp<ViewStyle>;
+  /**
+   * The number of zeros for the minutes.
+   */
+  leadingZeros?: 1 | 2;
+  /**
+   * The style of the stopwatch Text.
+   */
   textStyle?: StyleProp<TextStyle>;
+  /**
+   * If 0, the stopwatch will only display seconds and minutes.
+   * If 1, the stopwatch will display seconds, minutes and hundredth of ms.
+   */
+  trailingZeros?: 0 | 1;
 };
 
 export interface StopWatchMethods {
+  /**
+   * Pauses the stopwatch.
+   */
+  pause: () => void;
+  /**
+   * Starts the stopwatch. Has no effect if the stopwatch is already running.
+   */
   start: () => void;
-  stop: () => void;
+  /**
+   * Resets the stopwatch.
+   */
+  reset: () => void;
 }
 
 function StopWatch(
@@ -39,15 +73,19 @@ function StopWatch(
     animationDistance = DEFAULT_ANIMATION_DISTANCE,
     animationDuration = DEFAULT_ANIMATION_DURATION,
     containerStyle,
+    leadingZeros = 1,
     textStyle,
+    trailingZeros = 1,
   }: Props,
   ref: ForwardedRef<StopWatchMethods>
 ) {
-  const { hundredthMs, lastDigit, tens, minutes, stop, start } = useClock();
+  const { hundredthMs, lastDigit, tens, minutes, start, reset, pause } =
+    useClock();
 
   useImperativeHandle(ref, () => ({
+    pause,
     start,
-    stop,
+    reset,
   }));
 
   const oldLastDigit = useSharedValue<number>(-1);
@@ -113,6 +151,7 @@ function StopWatch(
 
   return (
     <View style={[styles.container, containerStyle]}>
+      {leadingZeros === 2 && <Text style={textStyle}>0</Text>}
       <Animated.Text
         key={`${minutes}-minutes`}
         style={textStyle}
@@ -121,7 +160,7 @@ function StopWatch(
       >
         {minutes}
       </Animated.Text>
-      <Animated.Text style={textStyle}>:</Animated.Text>
+      <Text style={textStyle}>:</Text>
       <Animated.Text
         key={`${tens}-tens`}
         style={textStyle}
@@ -138,8 +177,12 @@ function StopWatch(
       >
         {lastDigit}
       </Animated.Text>
-      <Animated.Text style={textStyle}>,</Animated.Text>
-      <Animated.Text style={textStyle}>{hundredthMs}</Animated.Text>
+      {trailingZeros === 1 && (
+        <>
+          <Text style={textStyle}>,</Text>
+          <Text style={textStyle}>{hundredthMs}</Text>
+        </>
+      )}
     </View>
   );
 }

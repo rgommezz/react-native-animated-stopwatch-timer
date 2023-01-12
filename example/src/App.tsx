@@ -13,6 +13,7 @@ export default function App() {
       <AnimatedStopWatch
         ref={animatedCounterRef}
         textStyle={styles.stopWatch}
+        animationDuration={100}
       />
       <View style={styles.buttonsContainer}>
         <Button
@@ -20,8 +21,12 @@ export default function App() {
           onPress={() => animatedCounterRef.current?.start()}
         />
         <Button
-          title="Stop"
-          onPress={() => animatedCounterRef.current?.stop()}
+          title="Pause"
+          onPress={() => animatedCounterRef.current?.pause()}
+        />
+        <Button
+          title="Reset"
+          onPress={() => animatedCounterRef.current?.reset()}
         />
       </View>
     </View>
@@ -37,7 +42,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 200,
+    width: 300,
     padding: 24,
   },
   stopWatch: {
