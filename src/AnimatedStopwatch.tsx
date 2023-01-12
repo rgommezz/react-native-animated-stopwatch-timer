@@ -14,7 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import type { StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
-import useStopwatch from './useStopwatch';
+import useTimer from './useTimer';
 
 const DEFAULT_ANIMATION_DELAY = 0;
 const DEFAULT_ANIMATION_DISTANCE = 80;
@@ -41,6 +41,10 @@ export interface StopwatchProps {
    * Extra style applied only to each digit, excluding separators.
    */
   digitStyle?: StyleProp<TextStyle>;
+  /**
+   * If you want to use it as a timer, set this value
+   */
+  initialTimeInMs?: number;
   /**
    * The number of zeros for the minutes.
    */
@@ -91,6 +95,7 @@ function Stopwatch(
     containerStyle,
     enterAnimationType = 'slide-in-up',
     digitStyle,
+    initialTimeInMs,
     leadingZeros = 1,
     separatorStyle,
     textCharStyle,
@@ -107,7 +112,7 @@ function Stopwatch(
     reset,
     pause,
     getSnapshot,
-  } = useStopwatch();
+  } = useTimer(initialTimeInMs);
 
   useImperativeHandle(ref, () => ({
     play,

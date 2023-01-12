@@ -29,6 +29,7 @@ export default function App() {
           })}
           textCharStyle={styles.stopWatchChar}
           trailingZeros={2}
+          initialTimeInMs={30 * 1000}
         />
         <View style={styles.buttonsContainer}>
           {/** @ts-ignore */}
