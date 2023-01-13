@@ -29,6 +29,8 @@ export default function App() {
           })}
           textCharStyle={styles.stopWatchChar}
           trailingZeros={2}
+          // Uncomment the below line to use it in timer mode
+          // initialTimeInMs={30 * 1000}
         />
         <View style={styles.buttonsContainer}>
           {/** @ts-ignore */}
