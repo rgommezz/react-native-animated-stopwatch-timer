@@ -5,14 +5,15 @@
 ![platforms: ios, android, web](https://img.shields.io/badge/platform-ios%2C%20android-blue)
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/rgommezz/react-native-animated-stopwatch-timer/blob/master/LICENSE)
 
-A React Native Stopwatch/Timer component that empowers **reanimated worklets** to smoothly animate the digits change. Cross-platform, performant, with all **layout animations executed on the UI thread at 60FPS**. Compatible with Expo.
+ <p><i>A React Native Stopwatch/Timer component that empowers <b>reanimated worklets</b> to smoothly animate the digits change. Cross-platform, performant, with all <b>layout animations executed on the UI thread at 60FPS</b>. Compatible with Expo.</i></p>
+ 
+ ## Preview
 
-It works in two modes:
+<img src="/gifs/stopwatch.gif" width="400" />
 
-- **Stopwatch**: The timer starts counting up from 0 (default).
-- **Timer**: The timer starts counting down from a given time. Use the `initialTimeInMs` prop to activate this mode.
+## Try it out
 
-![](gifs/stopwatch.gif)
+🧑‍💻 Run the [example app](https://snack.expo.dev/@rgommezz/react-native-animated-stopwatch-timer) with [Expo](https://expo.dev/) to see it in action. The source code for the examples are under the [/example](/example) folder.
 
 ## Installation
 
@@ -27,6 +28,13 @@ npm install react-native-reanimated
 ```
 
 If you are installing reanimated on a bare React Native app, you should also follow this [additional installation instructions.](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/installation/)
+
+## Modes
+
+You can use this component in two different modes:
+
+- **Stopwatch**: The timer starts counting up from 0 (default).
+- **Timer**: The timer starts counting down from a given time. Use the `initialTimeInMs` prop to activate this mode.
 
 ## Usage
 
@@ -70,7 +78,7 @@ return <StopwatchTimer ref={stopwatchTimerRef} />;
 | `leadingZeros`       | no       | `1` or `2`                        | The number of zeros for the minutes. Defaults to 1                                                                                                                                                                                                                                                                            |
 | `enterAnimationType` | no       | `'slide-in-up' or 'slide-in-down'` | Whether the new digit should enter from the top or the bottom                                                                                                                                                                                                                                                                 |
 | `separatorStyle`     | no       | `StyleProp<TextStyle>`            | Extra style applied only to separators. In this case, the colon (`:`) and the comma (`,`)                                                                                                                                                                                                                                     |
-| `onFinish`           | no       | `() => void`                      | Callback executed when the timer reaches 0 (only when working in timer mode and `initialTimeInMs` prop is provided)                                                                                                                                                                                                           |
+| `onFinish`           | no       | `() => void`                      | Callback executed when the timer reaches 0 (only when working in **timer mode** and `initialTimeInMs` prop is provided)                                                                                                                                                                                                           |
 | `textCharStyle`      | no       | `StyleProp<TextStyle>`            | The style applied to each individual character of the stopwatch/timer                                                                                                                                                                                                                                                         |
 | `trailingZeros`      | no       | `0`, `1` or `2`                   | If `0`, the component will only display seconds and minutes. If `1`, the component will display seconds, minutes and hundredth of ms. If `2`, the component will display seconds, minutes and tens of ms. Defaults to `1`                                                                                                     |
 
