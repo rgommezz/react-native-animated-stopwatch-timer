@@ -9,7 +9,8 @@
 
  ## Preview
 
-<img src="/gifs/stopwatch.gif" width="400" />
+https://user-images.githubusercontent.com/4982414/212443504-7c46a701-7e13-4504-8b39-88499fb17752.mp4
+
 
 ## Try it out
 
