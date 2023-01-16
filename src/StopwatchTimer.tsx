@@ -1,9 +1,4 @@
-import React, {
-  ForwardedRef,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-} from 'react';
+import React, { ForwardedRef, forwardRef, useImperativeHandle } from 'react';
 import Animated, {
   EntryAnimationsValues,
   ExitAnimationsValues,
@@ -126,31 +121,19 @@ function Stopwatch(
     getSnapshot,
   }));
 
-  const oldLastDigit = useSharedValue<number>(-1);
-  const oldTens = useSharedValue<number>(-1);
-  const oldMinutes = useSharedValue<number>(-1);
-
-  const newLastDigit = useSharedValue<number>(lastDigit);
-  const newTens = useSharedValue<number>(tens);
-  const newMinutes = useSharedValue<number>(minutes);
-
-  useEffect(() => {
-    newLastDigit.value = lastDigit;
-    newTens.value = tens;
-    newMinutes.value = minutes;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lastDigit, tens, minutes]);
+  const isSecondsDigitMounted = useSharedValue(false);
+  const isTensOfSecondsDigitMounted = useSharedValue(false);
+  const isMinutesDigitMounted = useSharedValue(false);
 
   const createEntering =
-    (oldValue: SharedValue<number>, numericValue: number) =>
+    (isFirstRender: SharedValue<boolean>) =>
     (values: EntryAnimationsValues) => {
       'worklet';
-      if (oldValue.value === -1) {
-        // skip entering animation on first render
-        oldValue.value = numericValue;
+      if (!isFirstRender.value) {
+        // Skip entering animation on first render
+        isFirstRender.value = true;
         return { initialValues: {}, animations: {} };
       }
-      oldValue.value = numericValue;
       const animations = {
         originY: withDelay(
           animationDelay,
@@ -209,7 +192,7 @@ function Stopwatch(
       <Animated.Text
         key={`${minutes}-minutes`}
         style={[styles.defaultCharStyle, textCharStyleWithoutWidth, digitStyle]}
-        entering={createEntering(oldMinutes, minutes)}
+        entering={createEntering(isMinutesDigitMounted)}
         exiting={exiting}
       >
         {minutes}
@@ -226,7 +209,7 @@ function Stopwatch(
       <Animated.Text
         key={`${tens}-tens`}
         style={[styles.defaultCharStyle, textCharStyleWithoutWidth, digitStyle]}
-        entering={createEntering(oldTens, tens)}
+        entering={createEntering(isTensOfSecondsDigitMounted)}
         exiting={exiting}
       >
         {tens}
@@ -234,7 +217,7 @@ function Stopwatch(
       <Animated.Text
         key={`${lastDigit}-count`}
         style={[styles.defaultCharStyle, textCharStyleWithoutWidth, digitStyle]}
-        entering={createEntering(oldLastDigit, lastDigit)}
+        entering={createEntering(isSecondsDigitMounted)}
         exiting={exiting}
       >
         {lastDigit}
