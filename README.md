@@ -6,7 +6,7 @@
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/rgommezz/react-native-animated-stopwatch-timer/blob/master/LICENSE)
 
  <p><i>A React Native Stopwatch/Timer component that empowers <b>reanimated worklets</b> to smoothly animate the digit change. Cross-platform, performant, with all <b>layout animations executed on the UI thread at 60FPS</b>. Compatible with Expo.</i></p>
- 
+
  ## Features
 - **:fire: Performant**: all digit animations are executed on the UI thread
 - **:gear: Highly configurable**: easily control its behaviour via props, like animation parameters and styles
@@ -15,10 +15,9 @@
 - **:hammer_and_wrench: Type safe**: fully written in TS
 - **:computer: Snack example**: a snack link is provided so you can try it out in your browser
 
- ## Preview
+## Preview
 
 https://user-images.githubusercontent.com/4982414/212443504-7c46a701-7e13-4504-8b39-88499fb17752.mp4
-
 
 ## Try it out
 
@@ -53,43 +52,42 @@ import StopwatchTimer, {
   StopwatchTimerMethods,
 } from 'react-native-animated-stopwatch-timer';
 
-const stopwatchTimerRef = useRef<StopwatchTimerMethods>(null);
+const App = () => {
+  const stopwatchTimerRef = useRef<StopwatchTimerMethods>(null);
 
-// Methods to control the stopwatch
+  // Methods to control the stopwatch
+  function play() {
+    stopwatchTimerRef.current?.play();
+  }
 
-function play() {
-  stopwatchTimerRef.current?.play();
-}
+  function pause() {
+    stopwatchTimerRef.current?.pause();
+  }
 
-function pause() {
-  const elapsedTimeInMs = stopwatchTimerRef.current?.pause();
-  // Do something with the elapsed time
-  console.log(elapsedTimeInMs);
-}
+  function reset() {
+    stopwatchTimerRef.current?.reset();
+  }
 
-function reset() {
-  stopwatchTimerRef.current?.reset();
-}
-
-return <StopwatchTimer ref={stopwatchTimerRef} />;
+  return <StopwatchTimer ref={stopwatchTimerRef} />;
+};
 ```
 
 ## Props
 
-| Name                 | Required | Type                              | Description                                                                                                                                                                                                                                                                                                                   |
-|----------------------| -------- |-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `animationDuration`  | no       | `number`                          | The enter/exit animation duration in milliseconds of a digit. Defaults to `80`                                                                                                                                                                                                                                                |
-| `animationDelay`     | no       | `number`                          | The enter/exit animation delay in milliseconds of a digit. Defaults to `0`                                                                                                                                                                                                                                                    |
-| `animationDistance`  | no       | `number`                          | The enter/exit animation vertical distance in dp of a digit. Defaults to `120`                                                                                                                                                                                                                                                |
-| `containerStyle`     | no       | `StyleProp<ViewStyle>`            | The style of the stopwatch/timer `View` container                                                                                                                                                                                                                                                                             |
-| `digitStyle`         | no       | `StyleProp<TextStyle>`            | Extra style applied to each digit, excluding separators (`:` and `,`). This property is useful if the `fontFamily` has different widths per digit to avoid an unpleasant fluctuation of the total component width as it runs. Check the example app where this is used on iOS's default San Francisco font, which presents this issue. |
-| `initialTimeInMs`    | no       | `number`                          | If you want to **use it as a timer**, set this value                                                                                                                                                                                                                                                                          |
-| `leadingZeros`       | no       | `1` or `2`                        | The number of zeros for the minutes. Defaults to 1                                                                                                                                                                                                                                                                            |
-| `enterAnimationType` | no       | `'slide-in-up' or 'slide-in-down'` | Whether the new digit should enter from the top or the bottom                                                                                                                                                                                                                                                                 |
-| `separatorStyle`     | no       | `StyleProp<TextStyle>`            | Extra style applied only to separators. In this case, the colon (`:`) and the comma (`,`)                                                                                                                                                                                                                                     |
-| `onFinish`           | no       | `() => void`                      | Callback executed when the timer reaches 0 (only when working in **timer mode** and `initialTimeInMs` prop is provided)                                                                                                                                                                                                           |
-| `textCharStyle`      | no       | `StyleProp<TextStyle>`            | The style applied to each individual character of the stopwatch/timer                                                                                                                                                                                                                                                         |
-| `trailingZeros`      | no       | `0`, `1` or `2`                   | If `0`, the component will only display seconds and minutes. If `1`, the component will display seconds, minutes, and a hundredth of ms. If `2`, the component will display seconds, minutes, and tens of ms. Defaults to `1`                                                                                                     |
+| Name                 | Required | Type                               | Description                                                                                                                                                                                                                                                                                                                            |
+| -------------------- | -------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `animationDuration`  | no       | `number`                           | The enter/exit animation duration in milliseconds of a digit. Defaults to `80`                                                                                                                                                                                                                                                         |
+| `animationDelay`     | no       | `number`                           | The enter/exit animation delay in milliseconds of a digit. Defaults to `0`                                                                                                                                                                                                                                                             |
+| `animationDistance`  | no       | `number`                           | The enter/exit animation vertical distance in dp of a digit. Defaults to `120`                                                                                                                                                                                                                                                         |
+| `containerStyle`     | no       | `StyleProp<ViewStyle>`             | The style of the stopwatch/timer `View` container                                                                                                                                                                                                                                                                                      |
+| `digitStyle`         | no       | `StyleProp<TextStyle>`             | Extra style applied to each digit, excluding separators (`:` and `,`). This property is useful if the `fontFamily` has different widths per digit to avoid an unpleasant fluctuation of the total component width as it runs. Check the example app where this is used on iOS's default San Francisco font, which presents this issue. |
+| `initialTimeInMs`    | no       | `number`                           | If you want to **use it as a timer**, set this value                                                                                                                                                                                                                                                                                   |
+| `leadingZeros`       | no       | `1` or `2`                         | The number of zeros for the minutes. Defaults to 1                                                                                                                                                                                                                                                                                     |
+| `enterAnimationType` | no       | `'slide-in-up' or 'slide-in-down'` | Whether the new digit should enter from the top or the bottom                                                                                                                                                                                                                                                                          |
+| `separatorStyle`     | no       | `StyleProp<TextStyle>`             | Extra style applied only to separators. In this case, the colon (`:`) and the comma (`,`)                                                                                                                                                                                                                                              |
+| `onFinish`           | no       | `() => void`                       | Callback executed when the timer reaches 0 (only when working in **timer mode** and `initialTimeInMs` prop is provided)                                                                                                                                                                                                                |
+| `textCharStyle`      | no       | `StyleProp<TextStyle>`             | The style applied to each individual character of the stopwatch/timer                                                                                                                                                                                                                                                                  |
+| `trailingZeros`      | no       | `0`, `1` or `2`                    | If `0`, the component will only display seconds and minutes. If `1`, the component will display seconds, minutes, and a hundredth of ms. If `2`, the component will display seconds, minutes, and tens of ms. Defaults to `1`                                                                                                          |
 
 ## Methods
 
