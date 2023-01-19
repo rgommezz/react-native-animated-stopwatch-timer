@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { IconButton, Provider as PaperProvider } from 'react-native-paper';
+import * as React from "react";
+import { IconButton, Provider as PaperProvider } from "react-native-paper";
 
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from "react-native";
 import StopwatchTimer, {
   StopwatchTimerMethods,
-} from 'react-native-animated-stopwatch-timer';
+} from "react-native-animated-stopwatch-timer";
 
 export default function App() {
   const stopwatchRef = React.useRef<StopwatchTimerMethods>(null);
@@ -63,29 +63,30 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   stopWatchContainer: {
     paddingVertical: 16,
     paddingHorizontal: 48,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    backgroundColor: 'black',
-    borderColor: 'gray',
+    backgroundColor: "black",
+    borderColor: "gray",
     borderRadius: 24,
   },
   buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     width: 240,
     paddingTop: 48,
   },
   stopWatchChar: {
     fontSize: 48,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 1,
-    color: '#9CCC65',
+    color: "#9CCC65",
+    fontVariant: ["tabular-nums"],
   },
 });
