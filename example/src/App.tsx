@@ -15,18 +15,6 @@ export default function App() {
         <StopwatchTimer
           ref={stopwatchRef}
           containerStyle={styles.stopWatchContainer}
-          digitStyle={Platform.select({
-            ios: {
-              width: 32,
-            },
-            android: undefined,
-          })}
-          separatorStyle={Platform.select({
-            ios: {
-              width: 14,
-            },
-            android: undefined,
-          })}
           textCharStyle={styles.stopWatchChar}
           trailingZeros={2}
           // Uncomment the below line to use it in timer mode
@@ -87,5 +75,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 1,
     color: '#9CCC65',
+    fontVariant: ['tabular-nums'],
   },
 });
