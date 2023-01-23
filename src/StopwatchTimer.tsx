@@ -173,8 +173,9 @@ function Stopwatch(
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { width, ...textCharStyleWithoutWidth } =
-    StyleSheet.flatten(textCharStyle);
+  const { width, ...textCharStyleWithoutWidth } = StyleSheet.flatten(
+    textCharStyle || {}
+  );
 
   return (
     <View style={[styles.container, containerStyle]}>
