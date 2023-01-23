@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconButton, Provider as PaperProvider } from 'react-native-paper';
 
-import { Platform, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import StopwatchTimer, {
   StopwatchTimerMethods,
 } from 'react-native-animated-stopwatch-timer';
