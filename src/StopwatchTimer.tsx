@@ -37,7 +37,11 @@ export interface StopwatchTimerProps {
    */
   digitStyle?: StyleProp<TextStyle>;
   /**
-   * If you want to use it as a timer, set this value
+   * Whether the component should work as a stopwatch or as a timer.
+   */
+  mode?: 'stopwatch' | 'timer';
+  /**
+   * Initial time in milliseconds
    */
   initialTimeInMs?: number;
   /**
@@ -93,6 +97,7 @@ function Stopwatch(
     animationDuration = DEFAULT_ANIMATION_DURATION,
     containerStyle,
     enterAnimationType = 'slide-in-up',
+    mode = 'stopwatch',
     digitStyle,
     initialTimeInMs,
     leadingZeros = 1,
@@ -112,7 +117,11 @@ function Stopwatch(
     reset,
     pause,
     getSnapshot,
-  } = useTimer(initialTimeInMs, onFinish);
+  } = useTimer({
+    initialTimeInMs,
+    onFinish,
+    mode,
+  });
 
   useImperativeHandle(ref, () => ({
     play,
