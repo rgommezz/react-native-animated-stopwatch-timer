@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IconButton, Provider as PaperProvider } from 'react-native-paper';
 
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import StopwatchTimer, {
   StopwatchTimerMethods,
 } from 'react-native-animated-stopwatch-timer';
@@ -17,8 +17,12 @@ export default function App() {
           containerStyle={styles.stopWatchContainer}
           textCharStyle={styles.stopWatchChar}
           trailingZeros={2}
-          // Uncomment the below line to use it in timer mode
+          // Uncomment the below 2 lines to use it in timer mode
+          // mode="timer"
           // initialTimeInMs={30 * 1000}
+          onFinish={() => {
+            Alert.alert('Timer Finished!');
+          }}
         />
         <View style={styles.buttonsContainer}>
           {/** @ts-ignore */}

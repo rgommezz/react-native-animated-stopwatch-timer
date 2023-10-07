@@ -4,10 +4,16 @@ import throttle from 'lodash.throttle';
 /**
  * A custom hook that handles the state for the timer
  */
-const useTimer = (
-  initialTimeInMs: number = 0,
-  onFinish: () => void = () => null
-) => {
+const useTimer = ({
+  initialTimeInMs = 0,
+  onFinish = () => null,
+  mode = 'stopwatch',
+}: {
+  initialTimeInMs?: number;
+  onFinish?: () => void;
+  mode?: 'timer' | 'stopwatch';
+}) => {
+  const direction = mode === 'timer' ? -1 : 1;
   const [elapsedInMs, setElapsedInMs] = useState(0);
   const startTime = useRef<number | null>(null);
   const pausedTime = useRef<number | null>(null);
@@ -26,15 +32,15 @@ const useTimer = (
 
   useEffect(() => {
     // Checking if it's a timer and it reached 0
-    if (initialTimeInMs > 0 && elapsedInMs >= initialTimeInMs) {
+    if (mode === 'timer' && elapsedInMs >= initialTimeInMs) {
       removeInterval();
       setElapsedInMs(initialTimeInMs);
       throttledOnFinish();
     }
-  }, [elapsedInMs, initialTimeInMs, throttledOnFinish]);
+  }, [elapsedInMs, initialTimeInMs, mode, throttledOnFinish]);
 
   function getSnapshot() {
-    return Math.abs(initialTimeInMs - elapsedInMs);
+    return Math.abs(initialTimeInMs + elapsedInMs * direction);
   }
 
   function play() {
@@ -43,7 +49,7 @@ const useTimer = (
       return;
     }
     // Timer mode and it reached 0, returning early
-    if (elapsedInMs === initialTimeInMs && initialTimeInMs > 0) {
+    if (elapsedInMs === initialTimeInMs && mode === 'timer') {
       return;
     }
     // First time playing, recording the start time
