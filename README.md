@@ -101,6 +101,7 @@ const App = () => {
 | `enterAnimationType` | no       | `'slide-in-up' or 'slide-in-down'` | Whether the new digit should enter from the top or the bottom                                                                                                                                                                                                                                                                          |
 | `separatorStyle`     | no       | `StyleProp<TextStyle>`             | Extra style applied only to separators. In this case, the colon (`:`) and the comma (`,`)                                                                                                                                                                                                                                              |
 | `textCharStyle`      | no       | `StyleProp<TextStyle>`             | The style applied to each individual character of the stopwatch/timer                                                                                                                                                                                                                                                                  |
+| `decimalSeparator` | no | `string` | Decimal separator for formatting time. Defaults to a comma `,` |
 
 ## Methods
 
