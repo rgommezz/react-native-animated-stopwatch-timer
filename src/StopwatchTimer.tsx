@@ -73,6 +73,10 @@ export interface StopwatchTimerProps {
    * Decimal separator for formatting time. Defaults to a comma (','), but any string can be used for custom formats.
    */
   decimalSeparator?: string;
+  /**
+   * The interval in milliseconds at which the stopwatch/timer should update. Defaults to 16ms.
+   */
+  intervalMs?: number;
 }
 
 export interface StopwatchTimerMethods {
@@ -110,6 +114,7 @@ function Stopwatch(
     textCharStyle,
     trailingZeros = 1,
     decimalSeparator = ',',
+    intervalMs = 16,
   }: StopwatchTimerProps,
   ref: ForwardedRef<StopwatchTimerMethods>
 ) {
@@ -126,6 +131,7 @@ function Stopwatch(
     initialTimeInMs,
     onFinish,
     mode,
+    intervalMs,
   });
 
   useImperativeHandle(ref, () => ({

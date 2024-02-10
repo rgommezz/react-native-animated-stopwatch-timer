@@ -8,10 +8,12 @@ const useTimer = ({
   initialTimeInMs = 0,
   onFinish = () => null,
   mode = 'stopwatch',
+  intervalMs = 16,
 }: {
   initialTimeInMs?: number;
   onFinish?: () => void;
   mode?: 'timer' | 'stopwatch';
+  intervalMs?: number;
 }) => {
   const direction = mode === 'timer' ? -1 : 1;
   const [elapsedInMs, setElapsedInMs] = useState(0);
@@ -66,7 +68,7 @@ const useTimer = ({
         startTime.current = startTime.current! + elapsedSincePaused;
         pausedTime.current = null;
       }
-    }, 16);
+    }, intervalMs);
   }
 
   function resetState() {
