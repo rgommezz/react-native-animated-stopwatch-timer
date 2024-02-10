@@ -69,6 +69,10 @@ export interface StopwatchTimerProps {
    * If 1, the component will display seconds, minutes and hundredth of ms.
    */
   trailingZeros?: 0 | 1 | 2;
+  /**
+   * Decimal separator for formatting time. Defaults to a comma (','), but any string can be used for custom formats.
+   */
+  decimalSeparator?: string;
 }
 
 export interface StopwatchTimerMethods {
@@ -105,6 +109,7 @@ function Stopwatch(
     separatorStyle,
     textCharStyle,
     trailingZeros = 1,
+    decimalSeparator = ',',
   }: StopwatchTimerProps,
   ref: ForwardedRef<StopwatchTimerMethods>
 ) {
@@ -241,7 +246,7 @@ function Stopwatch(
               separatorStyle,
             ]}
           >
-            ,
+            {decimalSeparator}
           </Text>
           <Text
             style={[
