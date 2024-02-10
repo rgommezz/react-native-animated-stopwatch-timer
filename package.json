@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-stopwatch-timer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "React Native Stopwatch component that smoothly animates the digits change",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
