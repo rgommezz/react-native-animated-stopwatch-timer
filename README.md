@@ -6,7 +6,8 @@
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen)](https://github.com/rgommezz/react-native-animated-stopwatch-timer/blob/master/LICENSE)
 
  <p><i>A React Native Stopwatch/Timer component that empowers <b>reanimated worklets</b> to smoothly animate the digit change. Cross-platform, performant, with all <b>layout animations executed on the UI thread at 60FPS</b>. Compatible with Expo.</i></p>
-
+ 
+- [How it is built](#how-it-is-built)
 - [Features](#features)
 - [Preview](#preview)
 - [Try it out](#try-it-out)
@@ -18,8 +19,10 @@
 - [Contributing](#contributing)
 - [License](#license)
 
+## How it is built
+Want to learn about the inner workings? Check out this deep dive that delves into the beauty of custom layout animations: [**Custom Layout Animations with Reanimated**](https://www.reactnative.university/blog/reanimated-custom-layout-animations)
 
- ## Features
+## Features
 - **:fire: Performant**: all digit animations are executed on the UI thread
 - **:gear: Highly configurable**: easily control its behaviour via props, like animation parameters and styles
 - **:watch: Dual mode**: use it as a stopwatch or timer
